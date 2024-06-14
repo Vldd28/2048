@@ -1,0 +1,56 @@
+Proiectul mi-a luat aproximativ 15 ore
+
+Meniul
+
+Pentru a realiza meniul m-am folosit de exemplele trimise si am luat pe rand 
+fiecare caz Daca se apasa q, v-a inchide intregul program, daca se apasa KEY_UP 
+sau KEY_DOWN vom naviga pe meniu in sus respectiv in jos. Cand utilizatorul v-a apasa
+pe ENTER va intra in New Game, Load Game, sau Quit in functie de care din ele era
+highlighted.
+
+Jocul
+
+La tabla de joc am folosit un window special pentru aceasta pentru a lucra si 
+afisa mai usor boardul.
+Pentru deplasarea celulelor si miscarea jocului am folosit 8 functii principale.
+4 Functii care shifteaza celulele intr-o directie (shift_up/down/right/left).
+La apasarea unei taste arrow, acestea vor shifta o linie/coloana in directia
+specificata.
+4 Functii de tip add_lines_right/left sau add_columns_up/down ce au scopul de a
+aduna elementele de acelasi timp care sunt vecine.
+Astfel, daca vom folosi functia shift pentru a le shifta, dupa vom folosi functia
+add_lines/add_columns pentru a aduna, va trebui sa shiftam inca o data pentru a nu
+lasa spatii goale intre celule. Desigur, dupa ce mutarea este efectuata vom adauga
+un element random(2 sau 4, ambele cu aceeasi probabilitate) pe tabla de joc.
+Nu vom apela aceste functii mereu, ci doar cand stim ca mutarea este valida.
+De asta ne folosim de o copie a boardului si vom pune elementul random doar daca
+boardul copie este diferit de boardul original, pe care am efectuat mutarea si
+adunarea. 
+Pentru a verifica daca jocul s-a terminat, am folosit o functie check_end_game
+care vede daca s-a ajuns la 2048, caz in care jocul a fost castigat.
+
+Miscare automata a celulelor
+
+Pentru miscarea automata a celulelor dupa ce nu se apasa o tasta un anumit timp,
+am creat o functie best_move. Aceasta ia toate cele 4 directii in care putem muta
+boardul si le realizeaza pe toate pe copii. Pentru fiecare copie, sunt numarate
+spatiile libere si se verifica daca mutarea este valida si chiar s-au mutat celule.
+Dupa care luam maximul dintre ele si returnam directia corespunzatoare.
+
+M-am folosit ulterior de aceasta functie pentru a verifica daca jocul s-a terminat.
+Am creat o variabila perfect_move si ii dau mereu valoarea best_move(board).
+Daca best_move(board) este 0, inseamna ca nu mai exista mutari posibile si jocul
+s-a terminat.
+
+BONUS
+
+Butonul de Undo
+
+Implementarea butonului de undo a fost folosita cu ajutorul copiilor matricelor.
+La fiecare mutare vom copia boardul si scorul. Astfel, se va retine mereu penultima
+mutare valida si vom putea reveni la ea apasand pe '/'.
+
+Design
+
+Pentru design am folosit culori diferite pentru fiecare numar si un chenar. Am mai folosit de 
+asemenea ASCII art realizat cu ajutorul siteului https://www.asciiart.eu/text-to-ascii-art
